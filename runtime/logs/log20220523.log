@@ -1,0 +1,8 @@
+[INFO][article.go:122]2022/05/23 16:42:11 [err.key: %s, err.message: %s tag_id 标签ID必须大于0]
+[INFO][article.go:122]2022/05/23 16:42:11 [err.key: %s, err.message: %s title 标题不能为空]
+[INFO][article.go:122]2022/05/23 16:42:11 [err.key: %s, err.message: %s desc 简述不能为空]
+[INFO][article.go:122]2022/05/23 16:42:11 [err.key: %s, err.message: %s content 内容不能为空]
+[INFO][article.go:122]2022/05/23 16:42:11 [err.key: %s, err.message: %s created_by 创建人不能为空]
+[INFO][article.go:122]2022/05/23 16:42:11 [err.key: %s, err.message: %s state 状态只允许0或1]
+[INFO][article.go:76]2022/05/23 16:42:15 [err.key: %s, err.message: %s state 状态只允许0或1]
+[INFO][article.go:76]2022/05/23 16:42:15 [err.key: %s, err.message: %s tag_id 标签ID必须大于0]
