@@ -32,6 +32,7 @@ func (model *Model) BeforeUpdate(tx *gorm.DB) error {
     return nil
 }
 
+
 func init() {
 	var (
 		err error
