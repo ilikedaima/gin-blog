@@ -23,12 +23,11 @@ var (
 var sysType =  runtime.GOOS
 func init() {
 	var err error
-	if sysType == "linux" {
-		Cfg, err = ini.Load("conf/pro.ini")
-		
-	}
+	
 	if sysType == "windows" {
 		Cfg, err = ini.Load("conf/app.ini")
+	}else {
+		Cfg, err = ini.Load("conf/pro.ini")
 	}
 	
 	if err != nil {
