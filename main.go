@@ -2,21 +2,42 @@ package main
 
 import (
 	"fmt"
+	"gin-blog/models"
+	"gin-blog/pkg/logging"
 	"gin-blog/pkg/setting"
 	"gin-blog/routers"
+	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
+func Init() {
+	setting.Setup()
+	models.Setup()
+	logging.Setup()
+	// gredis.Setup()
+	// util.Setup()
+}
 
 func main() {
-	
-    router := routers.InitRouter()
-	s := &http.Server{
-		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
-		Handler:        router,
-		ReadTimeout:    setting.ReadTimeout,
-		WriteTimeout:   setting.WriteTimeout,
-		MaxHeaderBytes: 1 << 20,
+	Init()
+	gin.SetMode(setting.ServerSetting.RunMode)
+
+	routersInit := routers.InitRouter()
+	readTimeout := setting.ServerSetting.ReadTimeout
+	writeTimeout := setting.ServerSetting.WriteTimeout
+	endPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
+	maxHeaderBytes := 1 << 20
+
+	server := &http.Server{
+		Addr:           endPoint,
+		Handler:        routersInit,
+		ReadTimeout:    readTimeout,
+		WriteTimeout:   writeTimeout,
+		MaxHeaderBytes: maxHeaderBytes,
 	}
 
-	s.ListenAndServe()
+	log.Printf("[info] start http server listening %s", endPoint)
+
+	server.ListenAndServe()
 }

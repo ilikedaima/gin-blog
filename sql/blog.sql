@@ -35,3 +35,5 @@ CREATE TABLE `blog_auth` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `blog`.`blog_auth` (`id`, `username`, `password`) VALUES (null, 'test', 'test123456');
+
+alter table blog_article add cover_image_url varchar(255) DEFAULT '' comment '封面图片地址';
