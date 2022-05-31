@@ -6,15 +6,18 @@ require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/astaxie/beego v1.10.1
+	github.com/boombuler/barcode v1.0.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-ini/ini v1.66.4
+	github.com/goki/freetype v0.0.0-20220119013949-7a161fd3728c
 	github.com/gomodule/redigo v1.8.8
 	github.com/jinzhu/gorm v1.9.16
 	github.com/swaggo/gin-swagger v1.4.3
 	github.com/swaggo/swag v1.8.2
 	github.com/tealeg/xlsx v1.0.5
 	github.com/unknwon/com v1.0.1
+	github.com/xuri/excelize/v2 v2.6.0
 )
 
 require (
@@ -41,8 +44,13 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
+	github.com/richardlehane/mscfb v1.0.4 // indirect
+	github.com/richardlehane/msoleps v1.0.1 // indirect
 	github.com/ugorji/go/codec v1.2.7 // indirect
+	github.com/xuri/efp v0.0.0-20220407160117-ad0f7a785be8 // indirect
+	github.com/xuri/nfp v0.0.0-20220409054826-5e722a1d9e22 // indirect
 	golang.org/x/crypto v0.0.0-20220518034528-6f7dac969898 // indirect
+	golang.org/x/image v0.0.0-20220413100746-70e8d0d3baa9 // indirect
 	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
 	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 	golang.org/x/text v0.3.7 // indirect

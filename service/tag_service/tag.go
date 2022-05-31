@@ -3,6 +3,7 @@ package tag_service
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"strconv"
 	"time"
 
@@ -11,6 +12,9 @@ import (
 	"gin-blog/pkg/gredis"
 	"gin-blog/pkg/logging"
 	"gin-blog/service/cache_service"
+
+	excelize1 "github.com/360EntSecGroup-Skylar/excelize"
+	excelize2 "github.com/xuri/excelize/v2"
 
 	"github.com/tealeg/xlsx"
 )
@@ -156,4 +160,80 @@ func (t *Tag) Export() (string, error) {
 	}
 
 	return filename, nil
+}
+
+
+func (t *Tag) Export1() (string, error) {
+	
+
+	tags, err := t.GetAll()
+	
+	if err != nil {
+		return "", err
+	}
+	// count, err = t.Count()
+	// if err!=nil {
+	// 	return "",err
+	// }
+	name := "标签信息"
+	f := excelize2.NewFile()
+    f.NewSheet("标签信息")
+
+	titles := []string{"ID", "名称", "创建人", "创建时间", "修改人", "修改时间"}
+	err = f.SetSheetRow(name,"A1",&titles)
+
+	if err!=nil {
+		return "",err
+	}
+	
+	for i, v := range tags {
+		values := []string{
+			strconv.Itoa(v.ID),
+			v.Name,
+			v.CreatedBy,
+			strconv.Itoa(v.CreatedOn),
+			v.ModifiedBy,
+			strconv.Itoa(v.ModifiedOn),
+		}
+		
+		f.SetSheetRow(name,"A"+strconv.Itoa(i+2),&values)
+	
+	}
+
+	time := strconv.Itoa(int(time.Now().Unix()))
+	filename := "tags-" + time + ".xlsx"
+
+	fullPath := export.GetExcelFullPath() + filename
+	err = f.SaveAs(fullPath)
+	if err != nil {
+		return "", err
+	}
+
+	return filename, nil
+}
+
+
+
+func (t *Tag) Import(r io.Reader) error {
+	xlsx, err := excelize1.OpenReader(r)
+	if err != nil {
+		return err
+	}
+
+	rows := xlsx.GetRows("标签信息")
+	for irow, row := range rows {
+		if irow > 0 {
+			var data = row
+			atag := Tag{Name: data[1]}
+			exists,err :=atag.ExistByName()
+			if err!=nil {
+				return err
+			}
+			if !exists {
+				models.AddTag(data[1], 1, data[2])
+			}	
+		}
+	}
+
+	return nil
 }
